@@ -1,5 +1,5 @@
 # Exploratory Data Analysis (EDA) Tool
- An data-driven app that provides various exploratory analysis and visualizations on the inputted data. 
+ An exploratory analysis tool that provides various summaries and visualizations on the uploaded data. 
  View this app in action [here](https://eda-tool.herokuapp.com/)
  
  ## Demos
