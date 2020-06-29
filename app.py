@@ -98,7 +98,7 @@ def main():
             if st.sidebar.checkbox("Distribution Plot", False, key="dist"):
                 if len(numerical_col) > 1:
                     col = st.sidebar.selectbox("Choose a column", numerical_col,  key="dist")
-                    st.subheader(f"{col}'s Distribution Plot'")
+                    st.subheader(f"{col}'s Distribution Plot")
                     sns.distplot(df[col])
                     plt.grid(True)
                     st.pyplot()
