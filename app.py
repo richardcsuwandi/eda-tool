@@ -9,7 +9,7 @@ def main():
     st.title("Exploratory Data Analysis (EDA) Tool")
     st.sidebar.title("Exploratory Data Analysis (EDA) Tool")
     st.markdown("### By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
-    st.sidebar.markdown("By Richard Cornelius Suwandi")
+    st.sidebar.markdown("By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
 
     # Upload file
     uploaded_file = st.sidebar.file_uploader("Upload file here", type="csv")
@@ -58,40 +58,52 @@ def main():
 
         elif activity == "Data Vizualizations":
             # Relation plot
-            if st.sidebar.checkbox('Relational Plot'):
-                st.subheader('Relational Plot')
-                x = st.sidebar.selectbox("Choose a column", numerical_col)
-                del numerical_col[numerical_col.index(x)]
-                y = st.sidebar.selectbox("Choose another column", numerical_col)
-                kind = st.sidebar.radio("Kind", ["scatter", "line"])
-                hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
-                sns.relplot(x=x, y=y, data=df, kind=kind, hue=hue)
-                st.pyplot()
+            if st.sidebar.checkbox("Relational Plot", key="rel"):
+                st.subheader("Relational Plot")
+                if len(numerical_col) > 1:
+                    x = st.sidebar.selectbox("Choose a column", numerical_col)
+                    del numerical_col[numerical_col.index(x)]
+                    y = st.sidebar.selectbox("Choose another column", numerical_col)
+                    kind = st.sidebar.radio("Kind", ["scatter", "line"])
+                    hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
+                    sns.relplot(x=x, y=y, data=df, kind=kind, hue=hue)
+                    st.pyplot()
+                else:
+                    st.warning("Not enough columns to create plot")
 
-            if st.sidebar.checkbox("Categorical Plot"):
-                x = st.sidebar.selectbox("Choose a column", categorical_col)
-                y = st.sidebar.selectbox("Choose another column", numerical_col)
-                kind_list = ["strip", "swarm", "box", "violin", "boxen", "point", "bar"]
-                kind = st.sidebar.selectbox("Kind", kind_list)
-                st.subheader(f"{kind.capitalize()} Plot")
-                hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
-                sns.catplot(x=x, y=y, data=df, kind=kind, hue=hue)
-                st.pyplot()
+            if st.sidebar.checkbox("Categorical Plot", key="cat"):
+                if (len(numerical_col) and len(categorical_col)) > 1:
+                    x = st.sidebar.selectbox("Choose a column", categorical_col)
+                    y = st.sidebar.selectbox("Choose another column", numerical_col)
+                    kind_list = ["strip", "swarm", "box", "violin", "boxen", "point", "bar"]
+                    kind = st.sidebar.selectbox("Kind", kind_list)
+                    st.subheader(f"{kind.capitalize()} Plot")
+                    hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
+                    sns.catplot(x=x, y=y, data=df, kind=kind, hue=hue)
+                    st.pyplot()
+                else:
+                    st.warning("Not enough columns to create plot")
 
             # Count plot
             if st.sidebar.checkbox("Count Plot", False, key="count"):
-                col = st.sidebar.selectbox("Choose a column", categorical_col, key="count")
-                st.subheader(f"{col}'s Count Plot'")
-                sns.countplot(x=col, data=df)
-                st.pyplot()
+                if len(categorical_col) > 1:
+                    col = st.sidebar.selectbox("Choose a column", categorical_col, key="count")
+                    st.subheader(f"{col}'s Count Plot'")
+                    sns.countplot(x=col, data=df)
+                    st.pyplot()
+                else:
+                    st.warning("Not enough columns to create plot")
 
             # Distribution plot
             if st.sidebar.checkbox("Distribution Plot", False, key="dist"):
-                col = st.sidebar.selectbox("Choose a column", numerical_col,  key="dist")
-                st.subheader(f"{col}'s Distribution Plot'")
-                sns.distplot(df[col])
-                plt.grid(True)
-                st.pyplot()
+                if len(numerical_col) > 1:
+                    col = st.sidebar.selectbox("Choose a column", numerical_col,  key="dist")
+                    st.subheader(f"{col}'s Distribution Plot'")
+                    sns.distplot(df[col])
+                    plt.grid(True)
+                    st.pyplot()
+                else:
+                    st.warning("Not enough columns to create plot")
 
             # Heatmap
             if st.sidebar.checkbox("Correlation Heatmap", False, key="heatmap"):
