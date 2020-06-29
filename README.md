@@ -5,4 +5,4 @@
  ## Demos
  Here are some demos on how to use the app,
  ![Demo 1](https://github.com/richardcsuwandi/eda-tool/blob/master/demos/demo1.gif?raw=true)
- ![Demo 2](https://github.com/richardcsuwandi/eda-tool/blob/master/demos/demo3.gif?raw=true)
+ ![Demo 2](https://github.com/richardcsuwandi/eda-tool/blob/master/demos/demo2.gif?raw=true)
