@@ -34,7 +34,7 @@ def main():
         if st.sidebar.checkbox("Show raw data", False):
             st.write(df)
 
-        activity_list = ["Basic Exploratory Analysis", "Data Vizualizations"]
+        activity_list = ["Basic Exploratory Analysis", "Data Visualizations"]
         activity = st.sidebar.selectbox("Choose activity", activity_list)
 
         if activity == "Basic Exploratory Analysis":
