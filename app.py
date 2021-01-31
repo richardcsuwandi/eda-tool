@@ -6,10 +6,13 @@ import seaborn as sns
 
 def main():
     # Main title
-    st.title("Exploratory Data Analysis (EDA) Tool")
-    st.sidebar.title("Exploratory Data Analysis (EDA) Tool")
+    st.title("Exploratory Data Analysis (EDA) Tool 📈")
+    st.sidebar.title("Exploratory Data Analysis (EDA) Tool 📈")
     st.markdown("### By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
     st.sidebar.markdown("By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
+
+    # App description
+    st.markdown("### An exploratory analysis tool that provides various summaries and visualizations on the uploaded data.")
 
     # Upload file
     uploaded_file = st.sidebar.file_uploader("Upload file here", type="csv")
