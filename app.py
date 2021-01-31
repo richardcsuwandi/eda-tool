@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def main():
-
     # Page layout
     st.set_page_config(page_title="EDA Tool",
     initial_sidebar_state="expanded")
@@ -22,11 +21,10 @@ def main():
     st.markdown("### An exploratory analysis tool that provides various summaries and visualizations on the uploaded data.")
 
     # Upload file
-    uploaded_file = st.sidebar.file_uploader("Upload file here", type="csv")
+    uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type="csv")
 
-    if uploaded_file is None:
-        st.info("Upload a CSV file to get started")
-    else:
+    st.info("Upload a CSV file to get started")
+    if uploaded_file is not None:
         st.success("File sucessfully uploaded!")
         df = pd.read_csv(uploaded_file)
         numerical_col = df.select_dtypes(include=np.number).columns.tolist()
@@ -66,7 +64,7 @@ def main():
                 st.subheader(f"{col}'s Unique Values")
                 st.write(df[col].value_counts())
 
-        elif activity == "Data Vizualizations":
+        elif activity == "Data Visualizations":
             # Relation plot
             if st.sidebar.checkbox("Relational Plot", key="rel"):
                 st.subheader("Relational Plot")
