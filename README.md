@@ -1,6 +1,10 @@
 # Exploratory Data Analysis (EDA) Tool
  An exploratory analysis tool that provides various summaries and visualizations on the uploaded data. 
- View this app in action [here](https://eda-tool.herokuapp.com/)
+ 
+ View this app in action here:
+ 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://eda-tool.herokuapp.com/)
+ 
  
  ## Demos
  Here are some demos on how to use the app,

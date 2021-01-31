@@ -73,7 +73,8 @@ def main():
                     st.pyplot()
                 else:
                     st.warning("Not enough columns to create plot")
-
+                    
+            # Categorical plot
             if st.sidebar.checkbox("Categorical Plot", key="cat"):
                 if (len(numerical_col) and len(categorical_col)) > 1:
                     x = st.sidebar.selectbox("Choose a column", categorical_col)
