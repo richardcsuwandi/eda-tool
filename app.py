@@ -5,11 +5,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def main():
+
+    # Page layout
+    st.set_page_config(page_title="EDA Tool",
+    initial_sidebar_state="expanded")
+    st.set_option("deprecation.showPyplotGlobalUse", False)
+
     # Main title
     st.title("Exploratory Data Analysis (EDA) Tool 📈")
     st.sidebar.title("Exploratory Data Analysis (EDA) Tool 📈")
     st.markdown("### By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
     st.sidebar.markdown("By [Richard Cornelius Suwandi](https://github.com/richardcsuwandi)")
+    st.sidebar.markdown("[![View on GitHub](https://img.shields.io/badge/GitHub-View_on_GitHub-blue?logo=GitHub)](https://github.com/richardcsuwandi/eda-tool)")
 
     # App description
     st.markdown("### An exploratory analysis tool that provides various summaries and visualizations on the uploaded data.")
@@ -73,16 +80,16 @@ def main():
                     st.pyplot()
                 else:
                     st.warning("Not enough columns to create plot")
-                    
+
             # Categorical plot
             if st.sidebar.checkbox("Categorical Plot", key="cat"):
                 if (len(numerical_col) and len(categorical_col)) > 1:
-                    x = st.sidebar.selectbox("Choose a column", categorical_col)
-                    y = st.sidebar.selectbox("Choose another column", numerical_col)
+                    x = st.sidebar.selectbox("Choose a column", categorical_col, key="cat_1")
+                    y = st.sidebar.selectbox("Choose another column", numerical_col, key="cat_2")
                     kind_list = ["strip", "swarm", "box", "violin", "boxen", "point", "bar"]
-                    kind = st.sidebar.selectbox("Kind", kind_list)
+                    kind = st.sidebar.selectbox("Kind", kind_list, key="cat_3")
                     st.subheader(f"{kind.capitalize()} Plot")
-                    hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
+                    hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None), key="cat_4")
                     sns.catplot(x=x, y=y, data=df, kind=kind, hue=hue)
                     st.pyplot()
                 else:
