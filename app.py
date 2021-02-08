@@ -1,8 +1,11 @@
-import streamlit as st
-import pandas as pd
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import streamlit as st
+
+from pandas_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 def main():
     # Page layout
@@ -34,7 +37,7 @@ def main():
         if st.sidebar.checkbox("Show raw data", False):
             st.write(df)
 
-        activity_list = ["Basic Exploratory Analysis", "Data Visualizations"]
+        activity_list = ["Basic Exploratory Analysis", "Data Visualizations", "Pandas Profiling"]
         activity = st.sidebar.selectbox("Choose activity", activity_list)
 
         if activity == "Basic Exploratory Analysis":
@@ -126,6 +129,10 @@ def main():
                 hue = st.sidebar.selectbox("Hue (Optional)", categorical_col.insert(0, None))
                 sns.pairplot(df, hue=hue)
                 st.pyplot()
+
+        elif activity == "Pandas Profiling":
+            pr = ProfileReport(df, explorative=True)
+            st_profile_report(pr)
 
 if __name__ == "__main__":
     main()
